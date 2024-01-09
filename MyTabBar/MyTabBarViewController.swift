@@ -59,8 +59,6 @@ class MyTabBarViewController: UIViewController, MyTabBarDelegate {
         tabBarView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
-        print(view.safeAreaInsets)
     }
     
     private func viewControllerFor(item: UITabBarItem) -> UIViewController? {
@@ -295,6 +293,7 @@ class MyTabItemView: UIView {
     
     let item: UITabBarItem
     weak var delegate: MyTabItemViewDelegate?
+    private var observer: NSKeyValueObservation?
     
     init(item: UITabBarItem, delegate: MyTabItemViewDelegate) {
         self.item = item
@@ -302,11 +301,13 @@ class MyTabItemView: UIView {
         isSelected = false
         
         super.init(frame: .zero)
+        
+        observer = item.observe(\.badgeValue) { [weak self] item, change in
+            print("[\(item.title)] badge value did change")
+            self?.configureView()
+        }
 
         addGestureRecognizer(tapGesture)
-
-        badgeView.text = item.badgeValue
-        badgeView.isHidden = item.badgeValue == nil
 
         setupUI()
         selectionDidChange()
@@ -330,6 +331,9 @@ class MyTabItemView: UIView {
         normalImage.tintColor = isSelected ? .black : .systemGray
         selectedImage.tintColor = isSelected ? .black : .systemGray
 
+        badgeView.text = item.badgeValue
+        badgeView.isHidden = item.badgeValue == nil
+
         guard isSelected && selectedImage.image != nil else { return }
         normalImage.isHidden = isSelected
         selectedImage.isHidden = !isSelected
@@ -348,15 +352,34 @@ class MyTabItemView: UIView {
             make.centerX.centerY.equalToSuperview()
         }
         
-        addSubview(badgeView)
-        badgeView.snp.makeConstraints { make in
-            make.leading.equalTo(stack.snp.trailing).offset(-6)
-            make.top.equalTo(stack.snp.top).offset(-6)
-        }
+        // What to do if there is no image...
+        // Where should the badge counter go?!
         
-        stack.addArrangedSubview(normalImage)
-        stack.addArrangedSubview(selectedImage)
+        stack.addArrangedSubview(makeImageBadgeView())
         stack.addArrangedSubview(titleLabel)
+    }
+    
+    private func makeImageBadgeView() -> UIView {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        
+        stackView.addArrangedSubview(normalImage)
+        stackView.addArrangedSubview(selectedImage)
+        
+        let view = UIView()
+        view.addSubview(stackView)
+        view.addSubview(badgeView)
+        
+        stackView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalToSuperview()
+        }
+        badgeView.snp.makeConstraints { make in
+            make.leading.equalTo(stackView.snp.trailing).offset(-6)
+            make.top.equalTo(stackView.snp.top).offset(-6)
+        }
+
+        return view
     }
     
     private func selectionDidChange() {

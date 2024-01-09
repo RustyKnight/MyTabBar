@@ -21,6 +21,8 @@ extension UIColor {
 }
 
 class OtherViewController: UIViewController {
+    private var count = 0
+    
     init(tabBarItem: UITabBarItem) {
         super.init(nibName: nil, bundle: nil)
         self.tabBarItem = tabBarItem
@@ -59,5 +61,17 @@ class OtherViewController: UIViewController {
 
         stack.addArrangedSubview(image)
         stack.addArrangedSubview(label)
+        
+        let button = UIButton()
+        button.setTitle("Counter", for: [])
+        button.addTarget(self, action: #selector(didTapCounter), for: .touchUpInside)
+        
+        stack.addArrangedSubview(button)
+    }
+    
+    @objc func didTapCounter() {
+        guard let item = tabBarItem else { return }
+        count += 1
+        item.badgeValue = "\(count)"
     }
 }
