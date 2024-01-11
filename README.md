@@ -10,3 +10,5 @@ The tab bar items are laid out using a series of `UIStackView`s and is intended 
 * Color customisation
 * Support for `apperence`?
 * Monitor more properties of the `UITabBarItem` ...?
+
+![](images/MyTabBar.mp4)
