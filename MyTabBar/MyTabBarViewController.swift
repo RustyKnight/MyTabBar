@@ -96,7 +96,6 @@ class MyTabBarViewController: UIViewController, MyTabBarDelegate {
             image: UIImage(systemName: "house", withConfiguration: iconConfig),
             selectedImage: UIImage(systemName: "house.fill", withConfiguration: iconConfig)
         )
-        item.badgeValue = "99"
         return makeViewControllerFor(item: item)
     }
     
@@ -303,7 +302,6 @@ class MyTabItemView: UIView {
         super.init(frame: .zero)
         
         observer = item.observe(\.badgeValue) { [weak self] item, change in
-            print("[\(item.title)] badge value did change")
             self?.configureView()
         }
 
