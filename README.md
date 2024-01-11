@@ -11,7 +11,4 @@ The tab bar items are laid out using a series of `UIStackView`s and is intended 
 * Support for `apperence`?
 * Monitor more properties of the `UITabBarItem` ...?
 
-![Video](images/MyTabBar.mp4)
-
-<video src="images/MyTabBar.mp4" controls="controls" style="max-width: 730px;">
-</video>
+![Video](images/MyTabBar.gif)
