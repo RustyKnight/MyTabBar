@@ -1,4 +1,4 @@
-![Swift](https://img.shields.io/badge/Swift-5.9-2-orange) ![iOS](https://img.shields.io/badge/iOS-17-orange)
+![Swift](https://img.shields.io/badge/Swift-5.9.2-orange) ![iOS](https://img.shields.io/badge/iOS-17-orange)
 
 # MyTabBar
 
