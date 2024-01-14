@@ -1,3 +1,5 @@
+![Swift](https://img.shields.io/badge/Swift-5.9-2-orange) ![iOS](https://img.shields.io/badge/iOS-17-orange)
+
 # MyTabBar
 
 An attempt at a custom tab bar which focusing on the layout of the tab bar items.
