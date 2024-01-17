@@ -154,6 +154,7 @@ class MyTabBarView: UIView, MyTabItemViewDelegate {
         view.axis = .horizontal
         view.alignment = .top
         //view.spacing = 2
+        view.distribution = .equalCentering
         return view
     }()
     
@@ -258,7 +259,7 @@ class MyTabItemView: UIView {
 
     private var selectedImage: UIImageView = {
         let view = UIImageView()
-        view.tintColor = .black
+        view.tintColor = .selectedTint
         return view
     }()
     
@@ -267,6 +268,7 @@ class MyTabItemView: UIView {
         label.font = UIFont.preferredFont(forTextStyle: .footnote)
         label.lineBreakMode = .byTruncatingTail
         label.textColor = .systemGray
+        label.numberOfLines = 2
         return label
     }()
     
@@ -325,9 +327,9 @@ class MyTabItemView: UIView {
         
         titleLabel.text = item.title
         
-        titleLabel.textColor = isSelected ? .black : .systemGray
-        normalImage.tintColor = isSelected ? .black : .systemGray
-        selectedImage.tintColor = isSelected ? .black : .systemGray
+        titleLabel.textColor = isSelected ? .selectedTint : .systemGray
+        normalImage.tintColor = isSelected ? .selectedTint : .systemGray
+        selectedImage.tintColor = isSelected ? .selectedTint : .systemGray
 
         badgeView.text = item.badgeValue
         badgeView.isHidden = item.badgeValue == nil
