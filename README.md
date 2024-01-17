@@ -14,3 +14,5 @@ The tab bar items are laid out using a series of `UIStackView`s and is intended 
 * Monitor more properties of the `UITabBarItem` ...?
 
 ![Video](images/MyTabBar.gif) <img src="images/Multiline.png" width="300">
+
+Example showing truncated text, badge support and multi line support
