@@ -13,4 +13,4 @@ The tab bar items are laid out using a series of `UIStackView`s and is intended 
 * Support for `apperence`?
 * Monitor more properties of the `UITabBarItem` ...?
 
-![Video](images/MyTabBar.gif)
+![Video](images/MyTabBar.gif) ![](images/MultiLine.png)
